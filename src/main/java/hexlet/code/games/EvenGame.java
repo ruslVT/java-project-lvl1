@@ -1,51 +1,23 @@
-package hexlet.code;
+package hexlet.code.games;
 
-import java.util.Random;
-import java.util.Scanner;
+import hexlet.code.Engine;
 
 public class EvenGame {
-
-    private static final int MAX_RANDOM_NUMBER = 99;
-    private static final int QUESTION_MAX = 3;
-
-
     public static void game() {
-        Random random = new Random();
-        Scanner scanner = new Scanner(System.in);
+        String requirement = "Answer 'yes' if the number is even, otherwise answer 'no'.";
+        String[] gameData = new String[Engine.getGameDataLength()];
 
-        System.out.println("Answer 'yes' if the number is even, otherwise answer 'no'.");
-
-        int questionCount = 0;
-
-        while (questionCount < QUESTION_MAX) {
-            questionCount++;
-            int randomNumber = random.nextInt(MAX_RANDOM_NUMBER) + 1;
-
-            System.out.println("Question: " + randomNumber);
-            System.out.print("Your answer: ");
-
-            String response = scanner.nextLine();
-
-            if (response.equals("yes") && isEven(randomNumber)) {
-                System.out.println("Correct!");
-            } else if ((!response.equals("yes")) && isEven(randomNumber)) {
-                System.out.println("'" + response + "' is wrong answer ;(. Correct answer was 'yes'.");
-                System.out.println("Let's try again, " + App.getPlayerName() + "!");
-                break;
-            } else if (response.equals("no") && !isEven(randomNumber)) {
-                System.out.println("Correct!");
-            } else if (!response.equals("no") && !isEven(randomNumber)) {
-                System.out.println("'" + response + "' is wrong answer ;(. Correct answer was 'no'.");
-                System.out.println("Let's try again, " + App.getPlayerName() + "!");
-                break;
-            }
-
-            if (questionCount == QUESTION_MAX) {
-                System.out.println("Congratulations, " + App.getPlayerName() + "!");
-            }
+        for (int i = 0; i < gameData.length; i = i + 2) {
+            int randomNumber = Engine.random();
+            String question = Integer.toString(randomNumber);
+            gameData[i] = question;
+            String answer = isEven(randomNumber) ? "yes" : "no";
+            gameData[i + 1] = answer;
         }
 
+        Engine.game(requirement, gameData);
     }
+
 
     public static boolean isEven(int number) {
         return number % 2 == 0;

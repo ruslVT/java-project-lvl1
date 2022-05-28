@@ -1,11 +1,12 @@
 package hexlet.code;
 
-import java.util.Random;
+import org.apache.commons.lang3.RandomUtils;
 import java.util.Scanner;
 
 public class Engine {
 
-    private static final int MAX_RANDOM_NUMBER = 9;
+    private static final int MAX_RANDOM_NUMBER = 20;
+    private static final int MIN_RANDOM_NUMBER = 1;
     private static final int MAX_ROUNDS = 3;
     private static final int GAME_DATA_LENGTH = 6;
     private static String playerName;
@@ -35,8 +36,7 @@ public class Engine {
     }
 
     public static int random() {
-        Random random = new Random();
-        return random.nextInt(MAX_RANDOM_NUMBER + 1);
+        return RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
     }
 
     public static void game(String requirement, String[] gameData) {

@@ -1,8 +1,12 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
+import org.apache.commons.lang3.RandomUtils;
 
 public class GcdGame {
+
+    private static final int MAX_RANDOM_NUMBER = 20;
+    private static final int MIN_RANDOM_NUMBER = 1;
 
     public static void game() {
 
@@ -10,8 +14,8 @@ public class GcdGame {
         String[] gameData = new String[Engine.getGameDataLength()];
 
         for (int i = 0; i < gameData.length; i += 2) {
-            int firstNumber = Engine.random();
-            int secondNumber = Engine.random();
+            int firstNumber = RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+            int secondNumber = RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
             String question = firstNumber + " " + secondNumber;
             gameData[i] = question;
             int result = gcd(firstNumber, secondNumber);

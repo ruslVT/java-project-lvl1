@@ -5,14 +5,17 @@ import org.apache.commons.lang3.RandomUtils;
 
 public class CalcGame {
 
+    private static final int MAX_RANDOM_NUMBER = 20;
+    private static final int MIN_RANDOM_NUMBER = 1;
+
     public static void game() {
         String requirement = "What is the result of the expression?";
         String[] gameData = new String[Engine.getGameDataLength()];
 
         for (int i = 0; i < gameData.length; i += 2) {
             char operator = randomOperator();
-            int firstNumber = Engine.random();
-            int secondNumber = Engine.random();
+            int firstNumber = RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
+            int secondNumber = RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
             String question = firstNumber + " " + operator + " " + secondNumber;
             gameData[i] = question;
             String answer = Integer.toString(calc(firstNumber, secondNumber, operator));

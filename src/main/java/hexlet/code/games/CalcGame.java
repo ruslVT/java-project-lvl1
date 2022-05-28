@@ -1,7 +1,7 @@
 package hexlet.code.games;
 
 import hexlet.code.Engine;
-import java.util.Random;
+import org.apache.commons.lang3.RandomUtils;
 
 public class CalcGame {
 
@@ -9,7 +9,7 @@ public class CalcGame {
         String requirement = "What is the result of the expression?";
         String[] gameData = new String[Engine.getGameDataLength()];
 
-        for (int i = 0; i < gameData.length; i = i + 2) {
+        for (int i = 0; i < gameData.length; i += 2) {
             char operator = randomOperator();
             int firstNumber = Engine.random();
             int secondNumber = Engine.random();
@@ -43,7 +43,6 @@ public class CalcGame {
 
     public static char randomOperator() {
         char[] operators = {'+', '-', '*'};
-        Random random = new Random();
-        return operators[random.nextInt(2)];
+        return operators[RandomUtils.nextInt(0, 2)];
     }
 }

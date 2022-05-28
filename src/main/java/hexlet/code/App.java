@@ -1,8 +1,13 @@
+/*
+ *      Game menu
+ */
+
 package hexlet.code;
 
 import hexlet.code.games.EvenGame;
 import hexlet.code.games.CalcGame;
 import hexlet.code.games.GcdGame;
+import hexlet.code.games.PrimeGame;
 import hexlet.code.games.Progression;
 
 import java.util.Scanner;
@@ -18,6 +23,7 @@ public class App {
         System.out.println("3 - Calc");
         System.out.println("4 - GSD");
         System.out.println("5 - Progression");
+        System.out.println("6 - Prime");
         System.out.println("0 - Exit");
         System.out.print("Your choice: ");
 
@@ -34,6 +40,8 @@ public class App {
                 GcdGame.game();
             case "5" ->
                 Progression.game();
+            case "6" ->
+                PrimeGame.game();
             default -> {
             }
         }

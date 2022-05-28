@@ -1,3 +1,7 @@
+/*
+ *      Engine for games
+ */
+
 package hexlet.code;
 
 import java.util.Scanner;
@@ -5,13 +9,14 @@ import java.util.Scanner;
 public class Engine {
 
     private static final int MAX_ROUNDS = 3;
-    private static final int GAME_DATA_LENGTH = 6;
+    private static final int GAME_DATA_LENGTH = 6; // Length array for 3 rounds with question and answer
     private static String playerName;
 
     public static int getGameDataLength() {
         return GAME_DATA_LENGTH;
     }
 
+    // greet and ask for a name
     public static void greeting() {
         Scanner scanner = new Scanner(System.in);
 
@@ -21,17 +26,20 @@ public class Engine {
         System.out.println("Hello, " + playerName + "!");
     }
 
+    // Return players answer
     public static String playersAnswer() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Your answer: ");
         return scanner.nextLine();
     }
 
+    // Message after wrong answer
     public static void wrongAnswer(String playersAnswer, String correctAnswer) {
-        System.out.println("'" + playersAnswer + "' is wrong answer ;(. Correct answer was " + correctAnswer + ".");
+        System.out.println("'" + playersAnswer + "' is wrong answer ;(. Correct answer was '" + correctAnswer + "'.");
         System.out.println("Let's try again, " + playerName + "!");
     }
 
+    // Game engine
     public static void game(String requirement, String[] gameData) {
         greeting();
         System.out.println(requirement);

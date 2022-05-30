@@ -11,39 +11,46 @@ import org.apache.commons.lang3.RandomUtils;
 public class Progression {
 
     private static final int MAX_ROW_LENGTH = 11;  // Max progression length
-    private static final  int MIN_ROW_LENGTH = 5;  // Min progression length
-    private static final int MAX_INTERVAL = 5;  // Interval progression
+    private static final int MIN_ROW_LENGTH = 5;  // Min progression length
+    private static final int MAX_DIFF = 5;  // Progression difference
     private static final int MAX_FIRST_NUMBER = 20;  // Max number for first element
+    private static final String DESCRIPTION = "What number is missing in the progression?";
 
     public static void game() {
 
-        String requirement = "What number is missing in the progression?";
-        String[] gameData = new String[Engine.getGameDataLength()];  // Array for questions and answers
+        String[][] gameData = new String[Engine.getCountRounds()][2];  // Array for questions and answers
 
-        for (int i = 0; i < gameData.length; i += 2) {
+        for (int i = 0; i < gameData.length; i++) {
             int rowLength = RandomUtils.nextInt(MIN_ROW_LENGTH, MAX_ROW_LENGTH);
-            int hiddenElement = RandomUtils.nextInt(1, rowLength);
-            int elementValue = RandomUtils.nextInt(1, MAX_FIRST_NUMBER);
-            int elementRange = RandomUtils.nextInt(1, MAX_INTERVAL);
+            int firstNumber = RandomUtils.nextInt(1, MAX_FIRST_NUMBER);
+            int diff = RandomUtils.nextInt(1, MAX_DIFF);
+            int[] row = progression(firstNumber, rowLength, diff);
+            int missElement = row[RandomUtils.nextInt(0, row.length)];
             String question = "";
-            String result = "";
 
-            // Generate question and answer for data array
-            for (int j = 0; j < rowLength; j++) {
-                if (j == hiddenElement) {
+            for (int num : row) {
+                if (num == missElement) {
                     question += ".. ";
-                    result = Integer.toString(elementValue);  // Answer for data array
                 } else {
-                    question += elementValue + " ";
+                    question += num + " ";
                 }
-
-                elementValue += elementRange;
             }
 
-            gameData[i] = question;
-            gameData[i + 1] = result;
+            gameData[i][0] = question;
+            gameData[i][1] = Integer.toString(missElement);
         }
 
-        Engine.game(requirement, gameData);  // Start game
+        Engine.game(DESCRIPTION, gameData);  // Start game
+    }
+
+    public static int[] progression(int firstNumber, int rowLength, int diff) {
+        int[] row = new int[rowLength];
+        row[0] = firstNumber;
+
+        for (int j = 1; j < row.length; j++) {
+            row[j] = row[j - 1] + diff;
+        }
+
+        return row;
     }
 }

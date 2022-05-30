@@ -8,59 +8,40 @@ import java.util.Scanner;
 
 public class Engine {
 
-    private static final int MAX_ROUNDS = 3;
-    private static final int GAME_DATA_LENGTH = 6; // Length array for 3 rounds with question and answer
-    private static String playerName;
+    private static final int COUNT_ROUNDS = 3;
 
-    public static int getGameDataLength() {
-        return GAME_DATA_LENGTH;
-    }
-
-    // greet and ask for a name
-    public static void greeting() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Welcome to the Brain Games");
-        System.out.print("May I have your name? ");
-        playerName = scanner.nextLine();
-        System.out.println("Hello, " + playerName + "!");
-    }
-
-    // Return players answer
-    public static String playersAnswer() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Your answer: ");
-        return scanner.nextLine();
-    }
-
-    // Message after wrong answer
-    public static void wrongAnswer(String playersAnswer, String correctAnswer) {
-        System.out.println("'" + playersAnswer + "' is wrong answer ;(. Correct answer was '" + correctAnswer + "'.");
-        System.out.println("Let's try again, " + playerName + "!");
+    public static int getCountRounds() {
+        return COUNT_ROUNDS;
     }
 
     // Game engine
-    public static void game(String requirement, String[] gameData) {
-        greeting();
+    public static void game(String requirement, String[][] gameData) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Brain Games");
+        System.out.print("May I have your name? ");
+        String playerName = scanner.nextLine();
+        System.out.println("Hello, " + playerName + "!");
         System.out.println(requirement);
 
         int index = 0;
-        for (int i = 0; i < MAX_ROUNDS; i++) {
-            System.out.println("Question: " + gameData[index]);
-            String answer = playersAnswer();
-            if (answer.equals(gameData[index + 1])) {
+        for (String[] row : gameData) {
+            System.out.println("Question: " + row[0]);
+            System.out.print("Your answer: ");
+            String answer = scanner.nextLine();
+            if (answer.equals(row[1])) {
                 System.out.println("Correct!");
+                index += 1;
+                if (index == COUNT_ROUNDS) {
+                    System.out.println("Congratulations, " + playerName + "!");
+                }
             } else {
-                wrongAnswer(answer, gameData[index + 1]);
+                System.out.println("'" + answer + "' is wrong answer ;(. Correct answer was '" + row[1] + "'.");
+                System.out.println("Let's try again, " + playerName + "!");
                 break;
-            }
-
-            index += 2;
-            if (index == (gameData.length)) {
-                System.out.println("Congratulations, " + playerName + "!");
             }
         }
 
+        scanner.close();
     }
 
 }

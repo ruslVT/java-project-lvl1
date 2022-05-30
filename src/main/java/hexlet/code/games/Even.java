@@ -8,25 +8,25 @@ package hexlet.code.games;
 import hexlet.code.Engine;
 import org.apache.commons.lang3.RandomUtils;
 
-public class EvenGame {
+public class Even {
 
     private static final int MAX_RANDOM_NUMBER = 100;
     private static final int MIN_RANDOM_NUMBER = 1;
+    private static final String DESCRIPTION = "Answer 'yes' if the number is even, otherwise answer 'no'.";
     public static void game() {
 
-        String requirement = "Answer 'yes' if the number is even, otherwise answer 'no'.";
-        String[] gameData = new String[Engine.getGameDataLength()];  // Array for questions and answers
+        String[][] gameData = new String[Engine.getCountRounds()][2];  // Array for questions and answers
 
         // Generate data for several rounds
-        for (int i = 0; i < gameData.length; i += 2) {
+        for (int i = 0; i < gameData.length; i++) {
             int randomNumber = RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
             String question = Integer.toString(randomNumber);  // Question for data array
-            gameData[i] = question;
+            gameData[i][0] = question;
             String answer = isEven(randomNumber) ? "yes" : "no";  // Answer for data array
-            gameData[i + 1] = answer;
+            gameData[i][1] = answer;
         }
 
-        Engine.game(requirement, gameData);  // Start game
+        Engine.game(DESCRIPTION, gameData);  // Start game
     }
 
     // Define even number or not

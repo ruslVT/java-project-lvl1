@@ -4,10 +4,10 @@
 
 package hexlet.code;
 
-import hexlet.code.games.EvenGame;
-import hexlet.code.games.CalcGame;
-import hexlet.code.games.GcdGame;
-import hexlet.code.games.PrimeGame;
+import hexlet.code.games.Even;
+import hexlet.code.games.Calc;
+import hexlet.code.games.Gcd;
+import hexlet.code.games.Prime;
 import hexlet.code.games.Progression;
 
 import java.util.Scanner;
@@ -31,21 +31,17 @@ public class App {
         String gameNumber = scanner.nextLine();
 
         switch (gameNumber) {
-            case "1" ->
-                Engine.greeting();
-            case "2" ->
-                EvenGame.game();
-            case "3" ->
-                CalcGame.game();
-            case "4" ->
-                GcdGame.game();
-            case "5" ->
-                Progression.game();
-            case "6" ->
-                PrimeGame.game();
-            default -> {
-            }
+            case "1" -> Cli.greeting();
+            case "2" -> Even.game();
+            case "3" -> Calc.game();
+            case "4" -> Gcd.game();
+            case "5" -> Progression.game();
+            case "6" -> Prime.game();
+            case "0" -> System.out.println("Goodbye!");
+            default -> System.out.println("Incorrect game number!");
         }
+
+        scanner.close();
     }
 
 

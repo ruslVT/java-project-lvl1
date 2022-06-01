@@ -16,7 +16,8 @@ public class Gcd {
 
     public static void game() {
 
-        String[][] gameData = new String[Engine.getCountRounds()][2];  // Array for questions and answers
+        // Array for questions and answers
+        String[][] gameData = new String[Engine.COUNT_ROUNDS][Engine.DATA_PER_ROUND];
 
         for (int i = 0; i < gameData.length; i++) {
             int firstNumber = RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);

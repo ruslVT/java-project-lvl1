@@ -16,7 +16,8 @@ public class Prime {
 
     public static void game() {
 
-        String[][] gameData = new String[Engine.getCountRounds()][2];  // Array for questions and answers
+        // Array for questions and answers
+        String[][] gameData = new String[Engine.COUNT_ROUNDS][Engine.DATA_PER_ROUND];
 
         // Generate data for several rounds
         for (int i = 0; i < gameData.length; i++) {

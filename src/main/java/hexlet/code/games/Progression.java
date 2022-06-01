@@ -18,16 +18,24 @@ public class Progression {
 
     public static void game() {
 
-        String[][] gameData = new String[Engine.getCountRounds()][2];  // Array for questions and answers
+        // Array for questions and answers
+        String[][] gameData = new String[Engine.COUNT_ROUNDS][Engine.DATA_PER_ROUND];
 
         for (int i = 0; i < gameData.length; i++) {
             int rowLength = RandomUtils.nextInt(MIN_ROW_LENGTH, MAX_ROW_LENGTH);
             int firstNumber = RandomUtils.nextInt(1, MAX_FIRST_NUMBER);
             int diff = RandomUtils.nextInt(1, MAX_DIFF);
-            int[] row = progression(firstNumber, rowLength, diff);
+            int[] row = new int[rowLength];
+
+            // creating a progression
+            for (int j = 0; j < row.length; j++) {
+                row[j] = firstNumber + (diff * j);
+            }
+
             int missElement = row[RandomUtils.nextInt(0, row.length)];
             String question = "";
 
+            // creating result string
             for (int num : row) {
                 if (num == missElement) {
                     question += ".. ";
@@ -41,16 +49,5 @@ public class Progression {
         }
 
         Engine.game(DESCRIPTION, gameData);  // Start game
-    }
-
-    public static int[] progression(int firstNumber, int rowLength, int diff) {
-        int[] row = new int[rowLength];
-        row[0] = firstNumber;
-
-        for (int j = 1; j < row.length; j++) {
-            row[j] = row[j - 1] + diff;
-        }
-
-        return row;
     }
 }

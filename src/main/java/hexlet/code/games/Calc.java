@@ -17,15 +17,16 @@ public class Calc {
 
     public static void game() {
 
-        String[][] gameData = new String[Engine.getCountRounds()][2];  // Array for questions and answers
+        // Array for questions and answers
+        String[][] gameData = new String[Engine.COUNT_ROUNDS][Engine.DATA_PER_ROUND];
 
         for (int i = 0; i < gameData.length; i++) {
-            char operator = randomOperator();
+            char operator = OPERATORS[RandomUtils.nextInt(0, OPERATORS.length)];
             int firstNumber = RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
             int secondNumber = RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
             String question = firstNumber + " " + operator + " " + secondNumber;  // Question for data array
             gameData[i][0] = question;
-            String answer = Integer.toString(calc(firstNumber, secondNumber, operator));  // Answer for data array
+            String answer = calc(firstNumber, secondNumber, operator);  // Answer for data array
             gameData[i][1] = answer;
         }
 
@@ -33,7 +34,7 @@ public class Calc {
     }
 
     // Calculate result of expression
-    public static int calc(int firstNumber, int secondNumber, char operator) {
+    public static String calc(int firstNumber, int secondNumber, char operator) {
         int result;
 
         switch (operator) {
@@ -47,13 +48,9 @@ public class Calc {
                 result = firstNumber * secondNumber;
                 break;
             default:
-                result = 0;
+                throw new RuntimeException("No logic found for this operator");
         }
-        return result;
-    }
 
-    // Get random operator
-    public static char randomOperator() {
-        return OPERATORS[RandomUtils.nextInt(0, OPERATORS.length)];
+        return Integer.toString(result);
     }
 }

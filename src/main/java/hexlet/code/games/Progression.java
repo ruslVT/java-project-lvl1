@@ -25,12 +25,7 @@ public class Progression {
             int rowLength = RandomUtils.nextInt(MIN_ROW_LENGTH, MAX_ROW_LENGTH);
             int firstNumber = RandomUtils.nextInt(1, MAX_FIRST_NUMBER);
             int diff = RandomUtils.nextInt(1, MAX_DIFF);
-            int[] row = new int[rowLength];
-
-            // creating a progression
-            for (int j = 0; j < row.length; j++) {
-                row[j] = firstNumber + (diff * j);
-            }
+            int[] row = progression(firstNumber, rowLength, diff);
 
             int missElement = row[RandomUtils.nextInt(0, row.length)];
             String question = "";
@@ -49,5 +44,16 @@ public class Progression {
         }
 
         Engine.game(DESCRIPTION, gameData);  // Start game
+    }
+
+    // creating progression
+    public static int[] progression(int firstNumber, int rowLength, int diff) {
+        int[] row = new int[rowLength];
+
+        for (int j = 0; j < row.length; j++) {
+            row[j] = firstNumber + (diff * j);
+        }
+
+        return row;
     }
 }

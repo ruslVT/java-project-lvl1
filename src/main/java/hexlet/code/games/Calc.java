@@ -48,7 +48,7 @@ public class Calc {
                 result = firstNumber * secondNumber;
                 break;
             default:
-                throw new RuntimeException("No logic found for this operator");
+                throw new RuntimeException("No logic found for operator: " + operator);
         }
 
         return Integer.toString(result);

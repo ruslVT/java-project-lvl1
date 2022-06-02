@@ -24,10 +24,14 @@ public class Even {
             int randomNumber = RandomUtils.nextInt(MIN_RANDOM_NUMBER, MAX_RANDOM_NUMBER);
             String question = Integer.toString(randomNumber);  // Question for data array
             gameData[i][0] = question;
-            String answer = randomNumber % 2 == 0 ? "yes" : "no";  // Answer for data array
+            String answer = isEven(randomNumber) ? "yes" : "no";  // Answer for data array
             gameData[i][1] = answer;
         }
 
         Engine.game(DESCRIPTION, gameData);  // Start game
+    }
+
+    public static boolean isEven(int number) {
+        return number % 2 == 0;
     }
 }
